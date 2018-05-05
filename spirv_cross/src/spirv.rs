@@ -268,8 +268,8 @@ where
         self.compiler.get_type(id)
     }
 
-    pub fn get_base_type(&self, id: u32) -> Result<Type, ErrorCode> {
-        self.compiler.get_base_type(id)
+    pub fn get_base_type_id(&self, id: u32) -> Result<u32, ErrorCode> {
+        self.compiler.get_base_type_id(id)
     }
 
     /// Gets the identifier for a member located at `index` within an `OpTypeStruct`.

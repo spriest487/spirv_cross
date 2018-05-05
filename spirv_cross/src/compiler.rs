@@ -328,7 +328,7 @@ impl<TTargetData> Compiler<TTargetData> {
         }
     }
 
-    pub fn get_base_type(&self, id: u32) -> Result<spirv::Type, ErrorCode> {
+    pub fn get_base_type_id(&self, id: u32) -> Result<u32, ErrorCode> {
         unsafe {
             let mut type_ptr = ptr::null();
 
@@ -338,10 +338,21 @@ impl<TTargetData> Compiler<TTargetData> {
                 &mut type_ptr,
             ));
 
-            let raw = *type_ptr;
-            let self_id = raw.self_id;
+            let self_id = (*type_ptr).self_id;
 
-            self.get_type(self_id)
+            check!(sc_internal_free_pointer(type_ptr as *mut c_void));
+
+            check!(sc_internal_compiler_get_type(
+                self.sc_compiler,
+                self_id,
+                &mut type_ptr,
+            ));
+
+            let base_id = (*type_ptr).self_id;
+
+            check!(sc_internal_free_pointer(type_ptr as *mut c_void));
+
+            Ok(base_id)
         }
     }
 
