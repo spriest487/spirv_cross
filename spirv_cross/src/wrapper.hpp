@@ -93,6 +93,7 @@ typedef struct ScSpecializationConstant
 
 typedef struct ScType
 {
+    uint32_t self_id;
     spirv_cross::SPIRType::BaseType type;
     uint32_t *member_types;
     size_t member_types_size;

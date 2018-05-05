@@ -328,6 +328,23 @@ impl<TTargetData> Compiler<TTargetData> {
         }
     }
 
+    pub fn get_base_type(&self, id: u32) -> Result<spirv::Type, ErrorCode> {
+        unsafe {
+            let mut type_ptr = ptr::null();
+
+            check!(sc_internal_compiler_get_type(
+                self.sc_compiler,
+                id,
+                &mut type_ptr,
+            ));
+
+            let raw = *type_ptr;
+            let self_id = raw.self_id;
+
+            self.get_type(self_id)
+        }
+    }
+
     pub fn get_member_name(&self, id: u32, index: u32) -> Result<String, ErrorCode> {
         unsafe {
             let mut name_ptr = ptr::null();

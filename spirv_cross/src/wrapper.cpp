@@ -278,6 +278,7 @@ ScInternalResult sc_internal_compiler_get_type(const ScInternalCompilerBase *com
             auto const array_size = type.array.size();
 
             auto ty = (ScType *)malloc(sizeof(ScType));
+            ty->self_id = type.self;
             ty->type = type.basetype;
             ty->member_types_size = member_types_size;
             ty->array_size = array_size;

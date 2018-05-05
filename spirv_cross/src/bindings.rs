@@ -1651,6 +1651,7 @@ pub mod root {
     #[repr(C)]
     #[derive(Debug, Copy)]
     pub struct ScType {
+        pub self_id: u32,
         pub type_: root::spirv_cross::SPIRType_BaseType,
         pub member_types: *mut u32,
         pub member_types_size: usize,

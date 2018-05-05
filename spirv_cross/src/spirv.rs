@@ -268,6 +268,10 @@ where
         self.compiler.get_type(id)
     }
 
+    pub fn get_base_type(&self, id: u32) -> Result<Type, ErrorCode> {
+        self.compiler.get_base_type(id)
+    }
+
     /// Gets the identifier for a member located at `index` within an `OpTypeStruct`.
     pub fn get_member_name(&self, id: u32, index: u32) -> Result<String, ErrorCode> {
         self.compiler.get_member_name(id, index)
